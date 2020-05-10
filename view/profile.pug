@@ -1,0 +1,19 @@
+extend base
+block  content
+    h2 User Page
+      .user-container
+          p Name :#{user.name}
+          p Email:#{user.email}
+          p Image 
+            img(src=`${user.profileImage}`, alt="", srcset="")
+            input(type="file", name="photo").updateProfile
+          p 
+            a(herf="/") Settings
+          
+          if user.role=="admin"
+            p 
+              a(href="/managePlans" ) Manage Plans
+            p 
+              a(href="/manageUser") Manage User
+            
+              

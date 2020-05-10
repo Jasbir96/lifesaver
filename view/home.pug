@@ -1,0 +1,115 @@
+extend base
+block header
+  include homenav.pug
+block content
+  section.features#features
+    h2
+      | Awesome Features
+    .container-parent
+      .container
+        i.far.fa-calendar-plus.icon
+        h3
+          | 365 DAYS/YEAR
+        p.feature-para
+          | Never cook again! We really mean that. Our subscription plans include up to 365 days/year coverage. You can
+          | also choose to order more flexibly if that's your style.
+      .container
+        i.fas.fa-shipping-fast.icon
+        h3 30 MINUTES OR FREE
+        p.feature-para
+          | You're only twenty minutes away from your delicious and super healthy meals delivered right to your home. We
+          | work with the best chefs in each town to ensure that you're 100% happy.
+      .container
+        i.fas.fa-carrot.icon
+        h3 100% ORGANIC
+        p.feature-para
+          | All our vegetables are fresh, organic and local. Animals are raised without added
+          | hormones or antibiotics. Good for your health, the environment, and it also tastes better!
+  section.How-to
+    h2 STEPS TO FOLLOW
+    .howto-container
+      img.iphone-img(src='Capture.PNG', alt='iphone-img', srcset='')
+      .steps-container
+        .step-container.clear-fix
+          .step-val 1
+          p.howto-para Choose the subscription plan that best fits your needs and sign up today.
+        .step-container.clear-fix
+          .step-val 2
+          p.howto-para
+            | Order your delicious meal using our mobile app or website. Or you can even call us!
+        .step-container.clear-fix
+          .step-val 3
+          p.howto-para Enjoy your meal after less than 20 minutes. See you the next time!
+  section.comments
+    h2 REVIEWS
+    .comments-parent
+      .container.comments-container
+        img.customer-img(src='/img/customer.jpg', alt='')
+        .comments__name David Smith
+        p
+          | Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi iure odio, quod nisi facilis commodi ut sunt
+          | ipsam, magnam eius repellat perferendis porro, iste voluptas!
+        i.fas.fa-star.small-icon
+        i.fas.fa-star.small-icon
+        i.fas.fa-star.small-icon
+        i.fas.fa-star.small-icon
+        i.fas.fa-star.small-icon
+      .container.comments-container
+        img.customer-img(src='/img/customer.jpg', alt='')
+        .comments__name David Smith
+        p
+          | Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi iure odio, quod nisi facilis commodi ut sunt
+          | ipsam, magnam eius repellat perferendis porro, iste voluptas!
+        i.fas.fa-star.small-icon
+        i.fas.fa-star.small-icon
+        i.fas.fa-star.small-icon
+        i.fas.fa-star.small-icon
+        i.fas.fa-star.small-icon
+      .container.comments-container
+        img.customer-img(src='/img/customer.jpg', alt='')
+        .comments__name David Smith
+        p
+          | Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi iure odio, quod nisi facilis commodi ut sunt
+          | ipsam, magnam eius repellat perferendis porro, iste voluptas!
+        i.fas.fa-star.small-icon
+        i.fas.fa-star.small-icon
+        i.fas.fa-star.small-icon
+        i.fas.fa-star.small-icon
+        i.fas.fa-star.small-icon
+  include planSection
+  section.Input.fadeInUp
+    h2 CONTACT US
+    .container__parent
+      video.bg-video__content(autoplay='', muted='', loop='')
+        source(src='Avocado.mp4', type='video/mp4')
+        |         Your browser is not supported
+      form
+        .entry
+          .entry-text
+            | Name
+          input(type='text', name='Name', placeholder='Your Name', required='')
+        .entry
+          .entry-text
+            | Email
+          input(type='email', name='email', placeholder='Your Email')
+        .entry
+          .entry-text
+            | How did you find us
+          select(name='', id='')
+            option(value='')
+              | friends
+            option(value='') search
+            option(value='') advertsiment
+            option(value='') other
+        .entry
+          .entry-text
+            | Drop us a line
+          textarea(name='', id='', placeholder='Your Message')
+        .entry
+          input.checkbox(type='checkbox', name='email')
+          span.checkbox-conditions
+            | I have read and agree with all the Privacy Policy and
+            | Terms Conditions
+        .btn-parent
+          a.btn.btn-full.form-button(href='#') SEND MESSAGE
+

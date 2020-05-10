@@ -1,0 +1,28 @@
+header
+  nav
+    ul.navigation
+      li.nav-line
+        a.white-anchors(href='/') FEATURES
+      li.nav-line
+        a.white-anchors(href='') DETAILS
+      li.nav-line
+        a.white-anchors(href='') REVIEWS
+      li.nav-line
+        a.white-anchors(href='') PLANS
+      if name
+        li.nav-line
+          a.white-anchors(href='/profile') #{name}
+        li.nav-line
+          a.white-anchors(href='javascript:;').logout LOGOUT
+      else
+        li.nav-line
+          a.white-anchors(href='/login') LOGIN
+  .showcase
+    h1.main-heading
+      | MEAL PLANS.
+      br
+      |         FOR 
+      span.developer
+    .btns
+      a.btn(href='') Book Now
+      a.btn.btn-empty(href='') Show me more
