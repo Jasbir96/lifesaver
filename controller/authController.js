@@ -155,6 +155,7 @@ function isAuthorized(roles) {
 async function forgetPassword(req, res) {
   let { email } = req.body;
   try {
+    console.log(email);
     const user = await userModel.findOne({ email: email });
     if (user) {
       // create token
@@ -184,7 +185,7 @@ async function forgetPassword(req, res) {
   } catch (err) {
     console.log(err);
     res.status(400).json({
-      err,
+      err: err.message,
       status: "cannot reset password"
     }
     )

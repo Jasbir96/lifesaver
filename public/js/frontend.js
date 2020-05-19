@@ -71,6 +71,9 @@ async function forgetPasswordHelper(email) {
   const response = await axios.patch("/api/users/forgetPassword", { email });
   if (response.data.status) {
     alert("Email Send to user");
+  } else {
+    alert("something went wrong");
+    console.log(response.data.err);
   }
 }
 async function resetPasswordHelper(password, confirmPassword, resetToken) {
