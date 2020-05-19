@@ -8,7 +8,7 @@ async function signup(req, res) {
     const newUser = await userModel.create(req.body);
     //  welcome mail
     // send Mail
-    let html = `<h1>Welcom${newUser.name} to our Family </h1>
+    let html = `<h1>Welcome ${newUser.name} to our Family </h1>
       `;
     let subject = "Get Going With life savers";
     let options = {
