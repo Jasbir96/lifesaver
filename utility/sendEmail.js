@@ -1,3 +1,4 @@
+const nodemailer=require("nodemailer");
 module.exports = async function sendEmail(option) {
   try {
     // email configuration=> transport
@@ -7,7 +8,7 @@ module.exports = async function sendEmail(option) {
       secure: true,
       auth: {
         user: "pepcodingdev@gmail.com",
-        pass: config.APP_PASSWORD
+        pass: process.env.APP_PASSWORD || require("../config/secrets").PASS
       }
     })
     // email options
@@ -15,8 +16,7 @@ module.exports = async function sendEmail(option) {
       from: "everyone@gmail.com",
       to: option.to,
       subject: option.subject,
-      text: "I am testing email",
-      html: option.email
+      html: option.html
     }
     // send mail
     await transport.sendMail(emailOptions);

@@ -83,7 +83,7 @@ block content
       video.bg-video__content(autoplay='', muted='', loop='')
         source(src='Avocado.mp4', type='video/mp4')
         |         Your browser is not supported
-      form
+      form.contact
         .entry
           .entry-text
             | Name
@@ -112,4 +112,6 @@ block content
             | Terms Conditions
         .btn-parent
           a.btn.btn-full.form-button(href='#') SEND MESSAGE
+block script
+    script(src="js/script.js")
 

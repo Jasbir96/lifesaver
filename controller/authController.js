@@ -1,4 +1,4 @@
-const JWT_SECRET = process.env.JWT_SECRET||require("../config/secrets").JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET || require("../config/secrets").JWT_SECRET;
 // db 
 const userModel = require("../model/userModel");
 const jwt = require("jsonwebtoken");
@@ -7,12 +7,22 @@ async function signup(req, res) {
   try {
     const newUser = await userModel.create(req.body);
     //  welcome mail
+    // send Mail
+    let html = `<h1>Welcom${newUser.name} to our Family </h1>
+      `;
+    let subject = "Get Going With life savers";
+    let options = {
+      to: newUser.email,
+      html,
+      subject: subject
+    }
+    await emailHelper(options);
     res.status(201).json({
       status: "user Signedup",
       newUser,
     });
   } catch (err) {
-    res.status(500).json({
+    res.status(200).json({
       status: "user can't be created",
       err,
     });
@@ -33,7 +43,7 @@ async function login(req, res) {
           // header
           res.cookie("jwt", token, { httpOnly: true });
           return res.status(200).json({
-            status: "userLogged In",token
+            status: "userLogged In", token
           });
         } else {
           throw new Error("email or password didn't match ");
@@ -46,7 +56,7 @@ async function login(req, res) {
     throw new Error("Invalid Input");
   } catch (err) {
     // console.log(err);
-    return res.status(500).json({
+    return res.status(200).json({
       status: "user can't be loggedIn",
       err,
     });
@@ -91,12 +101,12 @@ async function protectRoute(req, res, next) {
     // client browser => authorized page
     let clientType = req.get("User-Agent");
     // console.log(clientType);
-        if (clientType.includes("Mozilla") == true) {
+    if (clientType.includes("Mozilla") == true) {
       //  backend express 
       return res.redirect("/login");
     }
     else {
-      res.status(500).json({
+      res.status(200).json({
         err: err.message,
       });
     }
@@ -151,10 +161,12 @@ async function forgetPassword(req, res) {
       const resetToken = user.createResetToken();
       // confirm password
       await user.save({ validateBeforeSave: false });
-      resetPath = "http://localhost:3000/api/users/resetPassword/" + resetToken;
+      let resetPasswordLink = "http://localhost:3000/resetPassword/" + resetToken;
       // send Mail
-
-      let html, subject;
+      let html = `<h1>Please click on the link to reset your password </h1>
+      <p>${resetPasswordLink}</p>
+      `;
+      let subject = "Reset Token Email";
       let options = {
         to: user.email,
         html,
@@ -162,14 +174,13 @@ async function forgetPassword(req, res) {
       }
       await emailHelper(options);
       res.status(200).json({
-        resetPath,
+        resetPasswordLink,
         resetToken,
         status: "Token send to your email"
       })
     } else {
       throw new Error("User not found");
     }
-
   } catch (err) {
     console.log(err);
     res.status(400).json({
@@ -178,32 +189,53 @@ async function forgetPassword(req, res) {
     }
     )
   }
+}
+async function handleResetRequest(req, res, next) {
+  try {
+    const { token } = req.params;
+    console.log(token);
+    let user = await userModel.findOne({ resetToken: token });
+    if (user) {
 
+      req.token = token;
+      console.log("220 " + req.token)
+      // console.log("I was inside");
+      next();
+
+      // token verify 
+    } else {
+      res.redirect("/somethingWentWrong");
+    }
+
+  } catch (err) {
+    res.redirect("/somethingWentWrong");
+  }
 }
 async function resetPassword(req, res) {
   try {
     const token = req.params.token
     const { password, confirmPassword } = req.body;
+    console.log("218 " + token);
     const user = await userModel.findOne({
-      resetToken: token,
-      resetTokenExpires: { $gt: Date.now() }
+      resetToken: token
     })
-    console.log(password + " " + confirmPassword);
     if (user) {
       user.resetPasswordhandler(password, confirmPassword)
       // db save 
+      console.log(200 + "" + password + " " + confirmPassword);
       await user.save();
       res.status(200).json({
-        status: "Password reset "
+        success: "user password updated login with new password"
       })
 
     } else {
+      console.log("I was here");
       throw new Error("Not a valid token");
     }
 
   } catch (err) {
-    console.log(err);
-    res.status(500).json({
+    console.log(err.message);
+    res.status(200).json({
       status: "Some error occurred",
       err
     })
@@ -217,3 +249,4 @@ module.exports.forgetPassword = forgetPassword
 module.exports.resetPassword = resetPassword;
 module.exports.logout = logout;
 module.exports.isUserLoggedIn = isUserLoggedIn;
+module.exports.handleResetRequest = handleResetRequest;

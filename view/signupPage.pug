@@ -1,0 +1,25 @@
+extends base
+block content
+  .container-grey
+    .form-container
+      form.signup.form-page
+        h3.heading-secondary SIGNUP
+        .entry
+          .entry-text
+            | Name
+          input(type='text', name='Name', placeholder='Your Name', required='',class="name")
+        .entry
+          .entry-text
+            | Email
+          input(type='email', name='Email', placeholder='Your Email', required='', class="email")
+        .entry
+          .entry-text
+            | Password
+          input(type='password', name='Password', placeholder='**********' class="password")
+        .entry
+          .entry-text
+            | Confirm  Password
+          input(type='password', name="ConfirmPassword", placeholder='**********' class="confirmPassword")
+        .entry
+            .btn-parent.left
+                button(type="submit").btn.btn-full.form-button SIGN UP  

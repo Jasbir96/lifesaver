@@ -22,7 +22,8 @@ process.env.NODE_ENV = process.env.NODE_ENV || "production";
 app.use(express.json());
 app.use(cookieParser());
 // 1. static folder
-app.use(express.static("public"))
+app.use(express.static("public"));
+app.use('/resetPassword', express.static(path.join(__dirname, 'public')));
 // express => rendering /templating engine
 app.set("view engine", "pug");
 // view => directory
@@ -50,8 +51,6 @@ const port = process.env.PORT || 3000;
 app.listen(port, function () {
   console.log("Server has started at port 3000");
 });
-
-
 //3.
 // app.use(function f2(req, res, next) {
 //   console.log("middleware that ran after express.json  in f2");

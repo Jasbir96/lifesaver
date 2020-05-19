@@ -5,7 +5,6 @@ const multer = require("multer");
 // single file upload
 // const sharp = require("sharp");
 // const fs = require("fs");
-
 // ///////////////////////////JSON
 // const {
 //   getAllUser,
@@ -49,17 +48,14 @@ const upload = multer({
   storage: multerStorage,
   fileFilter: filter
 })
-
 //  mutipart data=> everything=> image  , naming , extension => put 
 userRouter.patch("/ProfileImage", upload.single("photo"), protectRoute, updateProfileImage);
 
 userRouter.post("/signup", signup);
 userRouter.post("/login", login);
-userRouter.patch("/forgetPassword", forgetPassword)
-userRouter.patch("/resetPassword/:token", resetPassword)
+userRouter.patch("/forgetPassword",  forgetPassword)
+userRouter.patch("/resetPassword/:token",resetPassword)
 // profile page 
-
-
 userRouter.use(protectRoute)
 userRouter.get("/userProfile", getUser);
 // isAuthorized
@@ -68,6 +64,5 @@ userRouter.use(isAuthorized(["admin"]));
 userRouter.route("").get(getAllUser);
 userRouter
   .route("/:id")
-
   .delete(deleteUser);
 module.exports = userRouter;

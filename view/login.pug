@@ -1,14 +1,18 @@
 extends base
-
 block content
-  .form-container
-    form(style="top:0rem").login
-      .entry
-        .entry-text Email
-        input(type='email').email
-      .entry
-        .entry-text Password
-        input(type='password').password
-      .entry
-        .btn-parent
-          button(type="submit").btn.btn-full.form-button LOGIN
+  .container-grey
+    .form-container
+      form.login.form-page
+        h3.heading-secondary LOGIN
+        .entry
+          .entry-text Email
+          input(type='email' placeholder="youremail@gmail.com").email
+        .entry
+          .entry-text Password
+          input(type='password' placeholder="*********").password
+        .entry
+          .btn-parent.left
+            button(type="submit").btn.btn-full.form-button LOGIN
+        .form-links__group
+          a(href="/signup").form-links Signup 
+          a(href="/forgetPassword").form-links Forget Password

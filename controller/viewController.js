@@ -37,8 +37,30 @@ async function getProfilePage(req, res) {
     user, name
   })
 }
+async function getSignupPage(req, res) {
+  res.render("signupPage.pug", {
+    title: "Signup Page"
+  })
+}
+async function getForgetPasswordPage(req, res) {
+  res.render("forgetPassword.pug", {
+    title: "ForgetPassword",
+  })
+}
+async function getResetPage(req, res) {
+  const { token } = req;
+  res.render("resetPassword", { token });
+
+}
+async function getSomethingWentWrong(req, res) {
+  res.render("somethingWentWrong");
+}
 module.exports.getTrialPage = getTrialPage;
 module.exports.getHomePage = getHomePage;
 module.exports.getPlansPage = getPlansPage;
 module.exports.getLoginPage = getLoginPage;
 module.exports.getProfilePage = getProfilePage;
+module.exports.getSignupPage = getSignupPage;
+module.exports.getForgetPasswordPage = getForgetPasswordPage;
+module.exports.getResetPage = getResetPage;
+module.exports.getSomethingWentWrong = getSomethingWentWrong;
