@@ -161,7 +161,7 @@ async function forgetPassword(req, res) {
       const resetToken = user.createResetToken();
       // confirm password
       await user.save({ validateBeforeSave: false });
-      let resetPasswordLink = "http://localhost:3000/resetPassword/" + resetToken;
+      let resetPasswordLink = `${req.protocol}://${req.get("host")}/${resetToken}`;
       // send Mail
       let html = `<h1>Please click on the link to reset your password </h1>
       <p>${resetPasswordLink}</p>
