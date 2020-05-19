@@ -24,7 +24,7 @@ async function createSession(req, res) {
           description: plan.description,
           // deploy website 
           amount: plan.price * 100,
-          currency: "usd",
+          currency: "inr",
           quantity: 1
         }
       ],
