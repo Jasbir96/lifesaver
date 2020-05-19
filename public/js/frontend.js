@@ -2,7 +2,7 @@
 // alert("I will go to the client ");
 const d = document;
 const stripe = Stripe('pk_test_ZN4f6Z1tmqHyaKzHblk84y2K00unLLJgRr');
-const paymentBtns = d.querySelector(".payment");
+const paymentBtns = d.querySelectorAll(".payment");
 const loginForm = d.querySelector(".login");
 const emailBox = d.querySelector(".email");
 const passwordBox = d.querySelector(".password");
